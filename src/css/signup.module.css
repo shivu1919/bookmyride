@@ -1,0 +1,45 @@
+.container{
+    width:100vw;
+    height: 100vh;
+    background-image: url("/bus.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    height: 350px;
+    width:450px;
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    align-items: center;
+   row-gap: 15px;
+}
+
+
+input{
+    width:250px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid black;
+    outline: none;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+button{
+    width: 80px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: rgb(57, 57, 224);
+    font-weight: 600;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
