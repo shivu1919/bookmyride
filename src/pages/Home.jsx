@@ -32,21 +32,39 @@ function Home() {
             fetch("http://localhost:8080/bookToGtr")
             .then((response)=>response.text())
             .then((data)=>{
-               alert(data)
+                if(data=="true"){
+                    window.location="/BookTicket"
+                   }
+                   else{
+                    alert('No ticket available selected date. Trying changing your date')
+                   }
+                   
             })
         }
         else if(destination=="Vizag"){
             fetch("http://localhost:8080/bookToVzg")
             .then((response)=>response.text())
             .then((data)=>{
-               alert(data)
+                if(data=="true"){
+                    window.location="/BookTicket"
+                   }
+                   else{
+                    alert('No ticket available selected date. Trying changing your date')
+                   }
+                   
             })
         }
         else if(destination=="Bengluru"){
             fetch("http://localhost:8080/bookToBlr")
             .then((response)=>response.text())
             .then((data)=>{
-               alert(data)
+               if(data=="true"){
+                window.location="/BookTicket"
+               }
+               else{
+                alert('No ticket available on selected date. Trying changing your date')
+               }
+
             })
         }
     }

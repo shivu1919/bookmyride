@@ -1,0 +1,26 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    background-color: #2660d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+input{
+    width: fit-content;
+}
+
+.btn{
+    background-color: red;
+}
