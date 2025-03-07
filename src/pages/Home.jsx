@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '../css/home.module.css'
+import axios  from 'axios'
 
 function Home() {
 
@@ -8,6 +9,12 @@ function Home() {
     const[source, setSource] = useState('Hyderabad')
     const[destination, setDestination] = useState('')
     const[date, setDate] = useState('')
+
+    const[data, setData] = useState({
+        "source":'Hyderabad',
+        "destination":'Bengluru',
+        "date":''
+    })
 
     const fetchFromCity = () =>{
         fetch("http://localhost:8080/from-city")
@@ -55,16 +62,15 @@ function Home() {
             })
         }
         else if(destination=="Bengluru"){
-            fetch("http://localhost:8080/bookToBlr")
-            .then((response)=>response.text())
+            axios.post("http://localhost:8080/bookToBlr",data)
+            
             .then((data)=>{
-               if(data=="true"){
-                window.location="/BookTicket"
+               if(data.data){
+                    window.location="/bookTicket"
                }
                else{
-                alert('No ticket available on selected date. Trying changing your date')
+                alert('No ticket available on the selected date.')
                }
-
             })
         }
     }
@@ -91,7 +97,11 @@ function Home() {
                 <div>
                     <label>To</label>  
                     <br/>  
-                    <select onChange={(e)=>setDestination(e.target.value)}>
+                    <select onChange={(e)=>{
+                        setDestination(e.target.value)
+                        data.destination=e.target.value
+                        
+                    }}>
                         <option value="">Select your destination</option>
                         {toCity.map((city,index)=><option key={index}>{city.name}</option>)}
                     </select>
@@ -99,7 +109,10 @@ function Home() {
 
                 <div>
                     <br/>
-                    <input type="date" onChange={(e)=>setDate(e.target.value)}></input>
+                    <input type="date" onChange={(e)=>{
+                        setDate(e.target.value);
+                        data.date=e.target.value;
+                    }}></input>
                 </div>
             </div>
 
@@ -111,5 +124,6 @@ function Home() {
     </>
   )
 }
+
 
 export default Home
