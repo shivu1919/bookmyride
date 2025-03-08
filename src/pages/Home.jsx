@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from '../css/home.module.css'
 import axios  from 'axios'
+import BookTicket from './BookTicket'
 
 function Home() {
 
@@ -12,9 +13,13 @@ function Home() {
 
     const[data, setData] = useState({
         "source":'Hyderabad',
-        "destination":'Bengluru',
+        "destination":'',
         "date":''
     })
+
+    const ticket = () =>{
+        return data;
+    }
 
     const fetchFromCity = () =>{
         fetch("http://localhost:8080/from-city")
@@ -35,44 +40,52 @@ function Home() {
     }
 
     const searchTicket = () =>{
-        if(destination=="Guntur"){
-            fetch("http://localhost:8080/bookToGtr")
-            .then((response)=>response.text())
-            .then((data)=>{
-                if(data=="true"){
-                    window.location="/BookTicket"
+
+        if(date==''){
+            alert("Please select date")
+        }
+        else{
+            if(destination=="Guntur"){
+                axios.post("http://localhost:8080/bookToGtr",data)
+                
+                .then((data)=>{
+                   if(data.data){
+                        window.location="/bookTicket"
                    }
                    else{
-                    alert('No ticket available selected date. Trying changing your date')
+                    alert('No ticket available on the selected date.')
                    }
-                   
-            })
-        }
-        else if(destination=="Vizag"){
-            fetch("http://localhost:8080/bookToVzg")
-            .then((response)=>response.text())
-            .then((data)=>{
-                if(data=="true"){
-                    window.location="/BookTicket"
+                })
+    
+            }
+            else if(destination=="Vizag"){
+                axios.post("http://localhost:8080/bookToVzg",data)
+                
+                .then((data)=>{
+                   if(data.data){
+                        window.location="/bookTicket"
                    }
                    else{
-                    alert('No ticket available selected date. Trying changing your date')
+                    alert('No ticket available on the selected date.')
                    }
-                   
-            })
+                })
+    
+            }
+            else if(destination=="Bengluru"){
+                axios.post("http://localhost:8080/bookToBlr",data)
+                
+                .then((data)=>{
+                   if(data.data){
+                        window.location="/bookTicket"
+                   }
+                   else{
+                    alert('No ticket available on the selected date.')
+                   }
+                })
+            }
         }
-        else if(destination=="Bengluru"){
-            axios.post("http://localhost:8080/bookToBlr",data)
-            
-            .then((data)=>{
-               if(data.data){
-                    window.location="/bookTicket"
-               }
-               else{
-                alert('No ticket available on the selected date.')
-               }
-            })
-        }
+
+        
     }
 
     useEffect(fetchFromCity,[])

@@ -12,24 +12,38 @@ function BookTicket() {
     const[object, setObject] = useState({
       "mob":mob,
       "source":"Hyderabad",
-      "destination":"Bengluru",
-      "date":"2025-03-07",
+      "destination":"",
+      "date":"",
       "name":name,
       "email":email,
       "age":age
     })
 
     const bookTicket = () =>{
+      if(object.destination=="Bengluru"){
         axios.post("http://localhost:8080/book_to_blr",object)
-        .then(()=>{
-          
-          
-
-          setName('')
-          setAge('')
-          setEmail('')
-          setMob('')
+        .then((data)=>{
+          alert('Ticket booked successfully')
+          window.location="/home"
         })
+      }
+
+      else if(object.destination=="Vizag"){
+        axios.post("http://localhost:8080/book_to_vzg",object)
+        .then((data)=>{
+          alert('Ticket booked successfully')
+          window.location="/home"
+        })
+      }
+
+      else{
+        axios.post("http://localhost:8080/book_to_gtr",object)
+        .then((data)=>{
+          alert('Ticket booked successfully')
+          window.location="/home"
+        })
+      }
+       
     }
 
   return (
