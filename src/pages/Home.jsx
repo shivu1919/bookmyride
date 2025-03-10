@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from '../css/home.module.css'
 import axios  from 'axios'
-import BookTicket from './BookTicket'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
 
@@ -10,6 +10,7 @@ function Home() {
     const[source, setSource] = useState('Hyderabad')
     const[destination, setDestination] = useState('')
     const[date, setDate] = useState('')
+    const navigate = useNavigate();
 
     const[data, setData] = useState({
         "source":'Hyderabad',
@@ -50,7 +51,7 @@ function Home() {
                 
                 .then((data)=>{
                    if(data.data){
-                        window.location="/bookTicket"
+                        navigate("/bookTicket",{state:{destination,date}})
                    }
                    else{
                     alert('No ticket available on the selected date.')
@@ -63,7 +64,7 @@ function Home() {
                 
                 .then((data)=>{
                    if(data.data){
-                        window.location="/bookTicket"
+                    navigate("/bookTicket",{state:{destination,date}})
                    }
                    else{
                     alert('No ticket available on the selected date.')
@@ -76,7 +77,7 @@ function Home() {
                 
                 .then((data)=>{
                    if(data.data){
-                        window.location="/bookTicket"
+                    navigate("/bookTicket",{state:{destination,date}})
                    }
                    else{
                     alert('No ticket available on the selected date.')
